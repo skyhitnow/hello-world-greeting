@@ -1,6 +1,6 @@
 package hello;
 
-public class Message {
+private class Message {
 	public String sayHello() {
 		return "Hello World";
 	}
