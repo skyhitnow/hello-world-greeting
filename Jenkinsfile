@@ -1,4 +1,5 @@
 pipeline{
+    //used for the master branch
     agent any
     tools{
         maven 'M3'
