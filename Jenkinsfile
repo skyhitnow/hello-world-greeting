@@ -42,21 +42,30 @@ pipeline{
                 }
             
 }
-                stage ('Publish'){
+        stage ('Publish'){
                     steps{
-                        script{
-                            def server = Artifactory.server 'local-artifactory-server'
-                def uploadSpec = """{
-                "files": [
-                {
-                "pattern": "target/hello-0.0.1.war",
-                "target": "helloworld-greeting-project/${BUILD_NUMBER}/",
-                "props": "Integration-Tested=Yes;Performance-Tested=No"
-                }
-                ]
-                }"""
-            server.upload(uploadSpec)
-                        }
+                        //script{
+                            //def server = Artifactory.server 'local-artifactory-server'
+               // def uploadSpec = """{
+               // "files": [
+                //{
+               // "pattern": "target/hello-0.0.1.war",
+               // "target": "helloworld-greeting-project/${BUILD_NUMBER}/",
+               // "props": "Integration-Tested=Yes;Performance-Tested=No"
+
+               rtUpload (
+                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
+                    serverId: 'local-artifactory-server',
+                    spec: """{
+                            "files": [
+                                    {
+                                        "pattern": "target/hello-0.0.1.war",
+                                        "target": "helloworld-greeting-project/${BUILD_NUMBER}/"
+                                    }
+                                ]
+                            }"""
+                )
+                
                     }
                 
 }
