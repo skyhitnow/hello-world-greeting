@@ -20,9 +20,17 @@ pipeline{
 
         stage("static code analysis"){
             steps{
-                sh 'mvn clean verify sonar:sonar -Dsonar.projectName=example-project \
-                -Dsonar.projectKey=example-project \
-                -Dsonar.projectVersion=$BUILD_NUMBER'
+                withSonarQubeEnv('local-sonarqube-server'){
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectName=example-project \
+                    -Dsonar.projectKey=example-project \
+                    -Dsonar.projectVersion=$BUILD_NUMBER'
+                println "${env.SONAR_HOST_URL}"
+                }
+
+
+                //sh 'mvn clean verify sonar:sonar -Dsonar.projectName=example-project \
+               // -Dsonar.projectKey=example-project \
+               // -Dsonar.projectVersion=$BUILD_NUMBER'
             }
         }
 
