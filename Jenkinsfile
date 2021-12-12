@@ -5,7 +5,7 @@ pipeline{
     }
     stages{
 
- stage{
+ stage("whole"){
             agent any
             stages{
 stage("SCM"){
