@@ -4,8 +4,9 @@ pipeline{
         maven 'M3'
     }
     stages{
-        agent any
-        stage{
+
+ stage{
+            agent any
             stages{
 stage("SCM"){
             steps{
