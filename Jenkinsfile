@@ -69,6 +69,14 @@ pipeline{
                     }
                 
 }
+                stage("stash"){
+                    agent {docker{
+                        label 'docker-pt'}
+                    }
+                    steps{
+                        echo "Hellow world"
+                    }
+                }
     }
     post{
         always{
