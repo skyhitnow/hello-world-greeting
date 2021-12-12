@@ -85,6 +85,7 @@ pipeline{
     post{
         always{
             echo "========always========"
+            echo "this is a always part"
         }
         success{
             echo "========pipeline executed successfully ========"
