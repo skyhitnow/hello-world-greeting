@@ -70,8 +70,8 @@ pipeline{
                 
 }
                 stage("stash"){
-                    agent {docker{
-                        label 'docker-pt'}
+                    agent {
+                        label 'docker-pt'
                     }
                     steps{
                         echo "Hellow world"
