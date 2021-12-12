@@ -88,7 +88,7 @@ stage("SCM"){
     post{
         always{
             echo "========always========"
-            echo "this is a always part"
+            echo "We made it! Yeah!"
         }
         success{
             echo "========pipeline executed successfully ========"
