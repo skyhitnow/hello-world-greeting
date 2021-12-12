@@ -73,7 +73,7 @@ pipeline{
                     agent {
                         docker{
                             label 'docker-pt'
-                            image 'performance-test-agent-1.0'
+                            image 'performance-tester-agent-1.0'
                         }
                         
                     }
