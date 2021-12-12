@@ -77,7 +77,7 @@ stage("SCM"){
         }
         
                 stage("stash"){
-                    
+                    steps{echo "NODE_NAME = ${env.NODE_NAME}"}
                     agent {
                         docker {
                             label 'docker-pt'  
