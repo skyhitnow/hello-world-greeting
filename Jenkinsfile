@@ -71,7 +71,10 @@ pipeline{
 }
                 stage("stash"){
                     agent {
-                        docker{label 'docker-pt'}
+                        docker{
+                            label 'docker-pt'
+                            image 'performance-test-agent-1.0'
+                        }
                         
                     }
                     steps{
