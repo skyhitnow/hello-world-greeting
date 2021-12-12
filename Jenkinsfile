@@ -1,10 +1,13 @@
 pipeline{
-    agent any
+    agent none
     tools{
         maven 'M3'
     }
     stages{
-        stage("SCM"){
+        agent any
+        stage{
+            stages{
+stage("SCM"){
             steps{
                 git 'https://github.com/skyhitnow/hello-world-greeting'
             }
@@ -69,6 +72,9 @@ pipeline{
                     }
                 
 }
+            }
+        }
+        
                 stage("stash"){
                     agent {
                         docker {
