@@ -74,7 +74,7 @@ pipeline{
                         docker {
                             label 'docker-pt'  
                             image ' performance-tester-agent-0.1'  
-                             
+                        }     
                     }
                     steps{
                         echo "Hellow world"
