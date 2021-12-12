@@ -79,7 +79,7 @@ stage("SCM"){
                 stage("stash"){
                     
                     agent {label 'docker-pt' }
-                    }
+                    
                     steps{
                         echo "Hellow world"
                     }
