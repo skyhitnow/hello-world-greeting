@@ -71,11 +71,8 @@ pipeline{
 }
                 stage("stash"){
                     agent {
-                        docker{
-                            label 'docker-pt'
-                            //image 'performance-tester-agent-1.0'
-                        }
-                        
+                        docker  'docker-pt'    
+                             
                     }
                     steps{
                         echo "Hellow world"
