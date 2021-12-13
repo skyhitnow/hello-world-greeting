@@ -76,13 +76,39 @@ stage("SCM"){
             }
         }
         
-                stage("stash"){
+                stage("performance testing"){
                     
                     agent {label 'docker-pt' }
-                    
-                    steps{
-                        echo "Hellow world"
+                    stages{
+                        stage("stash"){
+                            steps{
+                        stash includes: 'target/hello-0.0.1.war,src/pt/Hello_World_Test_Plan.jmx',
+                        name: 'binary'
+                        
                     }
+                        }
+                        stage('Start Tomcat'){
+                            steps{
+                                sh '''cd /home/jenkins/tomcat/bin
+                                ./startup.sh''';
+                            }
+                        }
+                        stage('deploy'){
+                            steps{
+                            unstash 'binary'
+                            sh 'cp target/hello-0.0.1.war /home/jenkins/tomcat/webapps/';
+                            }
+}
+                        stage("Performance Testing"){
+                            steps{
+                                sh '''cd /opt/jmeter/bin/
+                                ./jmeter.sh -n -t $WORKSPACE/src/pt/Hello_World_Test_Plan.jmx -l $WORKSPACE/test_report.jtl''';
+                                step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl'])
+                            }
+                        }
+                        }
+                    }
+                    
                 }
     }
     post{
