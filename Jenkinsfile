@@ -1,14 +1,11 @@
 pipeline{
-    agent none
+    agent any
     tools{
         maven 'M3'
     }
     stages{
 
- stage("whole"){
-            agent any
-            stages{
-stage("SCM"){
+        stage("SCM"){
             steps{
                 git 'https://github.com/skyhitnow/hello-world-greeting'
             }
@@ -69,24 +66,19 @@ stage("SCM"){
                                 ]
                             }"""
                 )
+                stash includes: 'target/hello-0.0.1.war,src/pt/Hello_World_Test_Plan.jmx',
+                name: 'binary'
                 
                     }
                 
-}
+
             }
-        }
+        
         
                 stage("performance testing"){
                     
                     agent {label 'docker-pt' }
                     stages{
-                        stage("stash"){
-                            steps{
-                        stash includes: 'target/hello-0.0.1.war,src/pt/Hello_World_Test_Plan.jmx',
-                        name: 'binary'
-                        
-                    }
-                        }
                         stage('Start Tomcat'){
                             steps{
                                 sh '''cd /home/jenkins/tomcat/bin
