@@ -110,7 +110,7 @@ stage("SCM"){
                     }
                     
                 }
-    }
+    
     post{
         always{
             echo "========always========"
