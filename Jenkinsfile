@@ -100,6 +100,14 @@ pipeline{
                                 step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl'])
                             }
                         }
+                        stage("Promote build in artifactory"){
+                            withCredentials([usernameColonPassword(credentialsId:
+                                            'artifactory-account', variable: 'credentials')]) {
+                            sh 'curl -u${credentials} -X PUT
+                            "http://192.168.123.152:8081/artifactory/api/storage/example-project/
+                            ${BUILD_NUMBER}/hello-0.0.1.war?properties=PerformanceTested=Yes"';
+                            }
+                        }
                         }
                     }
                     
