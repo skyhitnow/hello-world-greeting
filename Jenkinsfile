@@ -88,6 +88,8 @@ pipeline{
                         stage('deploy'){
                             steps{
                             unstash 'binary'
+                            sh 'pwd'
+                            sh 'ls target'
                             sh 'cp target/hello-0.0.1.war /home/jenkins/tomcat/webapps/';
                             }
 }
